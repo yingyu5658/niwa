@@ -28,6 +28,7 @@
          :publishing-function org-html-publish-to-html
          :with-author nil
          :with-creator nil
+         :html-postamble nil
          :section-numbers nil)
 
          ("niwa"
