@@ -23,7 +23,7 @@ scripts
 
 *** niwa.sh
 
-**** new_note()
+**** =new_note()=
 
 #+begin_src bash
 new_note() {

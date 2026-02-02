@@ -3,7 +3,7 @@
 #+LANGUAGE: zh-CN
 #+OPTIONS: num:nil
 #+HTML_HEAD: <style>
-#+HTML_HEAD: body {
+#+HTML_HEAD: body, pre {
 #+HTML_HEAD:    background-color: black;
 #+HTML_HEAD:    color: white;
 #+HTML_HEAD: }
