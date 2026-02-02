@@ -1,0 +1,16 @@
+#+title: Verdant的杂物间
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+EXPORT_FILE_NAME: ~/niwa/public/index.html
+
+-----
+
+This is a [[https://motherfuckingwebsite.com/][motherfucking-website]].
+
+这里是 Verdant 的杂物间，也是我「[[./radical-minimalist-web-design.org][激进极简主义网页设计]]」的实验田。内容的风格上更像数字花园。会发布一些半成品文章、某些问题的解决方案或笔记。
+
+** 最近更新
+- [[./radical-minimalist-web-design.org][激进极简主义网页设计]]
+
+** 小径
+*** 技术
+- [[./tags/web.org][网页]]

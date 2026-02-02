@@ -1,0 +1,2 @@
+#+title:
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup

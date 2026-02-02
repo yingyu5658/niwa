@@ -1,0 +1,13 @@
+#+AUTHOR: Verdant
+#+EMAIL: i@glowisle.me
+#+LANGUAGE: zh-CN
+#+OPTIONS: num:nil
+#+HTML_HEAD: <style>
+#+HTML_HEAD: body {
+#+HTML_HEAD:    background-color: black;
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: a {
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: </style>

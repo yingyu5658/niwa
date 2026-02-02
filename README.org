@@ -1,0 +1,34 @@
+#+title: niwa
+#+AUTHOR: Verdant
+#+LANGUAGE: zh-CN
+
+** niwa 是什么
+niwa（庭 / にわ）是我的 *极简数字花园实现方式* 。 _[[https://www.glowisle.me/][映屿]]的一部分_ 。
+
+它不是博客框架，也不是 CMS，而是一套基于（doom) Emacs 的朴素的约定：
+
+- 使用 Org mode 写作
+- 使用 bash 和 elisp 脚本实现导出为静态 HTML
+- 不依赖任何数据库、后端、Javascript 或复杂构建工具
+- 关注内容本身
+
+[[https://niwa.glowisle.me/][在线演示]]
+
+** 使用方式
+*** 新建内容
+#+begin_src
+$ cd ~/niwa
+$ bash ./script/niwa new my-post
+#+end_src
+*** 导出为 HTML 文件
+#+begin_src
+$ mkdir -p ~/niwa/public
+$ bash ./script/niwa.sh build
+#+end_src
+
+** 设计理念
+- 简单轻量
+- 内容优先，而非主题或样式
+- 纯文本
+- 构建过程可理解、可修改
+- 能用 bash 脚本解决的事情，不引入额外框架

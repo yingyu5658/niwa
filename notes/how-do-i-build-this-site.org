@@ -1,0 +1,5 @@
+#+title: 我是如何构建这个站点的
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+EXPORT_FILE_NAME: /home/yingyu5658/niwa/public/how-do-i-build-this-site.html
+
+这个站点只用到了两样东西：Emacs 和 bash。
