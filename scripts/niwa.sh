@@ -11,7 +11,6 @@ TEMPLATE_FILE="$GARDEN_DIR/template/template.org"       # 模板文件目录
 COMMAND_NEW="new"       # 新建笔记
 COMMAND_BUILD="build"
 
-
 new_note() {
     file_name=$1
     cp $TEMPLATE_FILE "$NOTES_DIR/${file_name}.org" && echo "创建笔记成功：$NOTES_DIR/${file_name}.org"
