@@ -1,3 +1,4 @@
 #+title: #web
+#+SETUPFILE: ../../template/setup/minimal.setup
 
 - [[file:../radical-minimalist-web-design.org][激进极简主义网页设计]]
