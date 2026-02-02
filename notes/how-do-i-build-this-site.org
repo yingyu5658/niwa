@@ -1,5 +1,131 @@
 #+title: 我是如何构建这个站点的
+#+filetags: :technology:emacs:
 #+SETUPFILE: ~/niwa/template/setup/minimal.setup
 #+EXPORT_FILE_NAME: /home/yingyu5658/niwa/public/how-do-i-build-this-site.html
 
-这个站点只用到了两样东西：Emacs 和 bash。
+在[[https://github.com/yingyu5658/niwa][Github]]上查看这个项目→
+
+-----
+
+** 这个网站是怎么做的？
+
+仅用 Emacs 两个脚本文件：
+
+#+begin_src
+$ tree scripts
+scripts
+├── niwa.sh
+└── publish.el
+#+end_src
+
+- =niwa.sh=: 主程序，处理命令。目前只有 new 用于新建笔记，build 用于构建。
+- =publish.el=: 一个 Elisp 脚本，做一些配置，批量导出 org 为 html。
+
+*** niwa.sh
+
+**** new_note()
+
+#+begin_src bash
+new_note() {
+    file_name=$1
+    cp $TEMPLATE_FILE "$NOTES_DIR/${file_name}.org" && echo "创建笔记成功：$NOTES_DIR/${file_name}.org"
+    echo "#+EXPORT_FILE_NAME: $PUBLIC_DIR/${file_name}.html" >> "$NOTES_DIR/${file_name}.org"
+}
+#+end_src
+
+原理非常简单，复制模板 org 文件到命令行参数给定的文件名。并且将一个导出配置重定向到这个文件，用于导出单页 html。
+
+在 =template.org= 中只有两行文本：
+
+#+begin_src org
+#+title:
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+end_src
+
+第一行标题，第二行引入 setup：
+
+#+begin_src setup
+#+AUTHOR: Verdant
+#+EMAIL: i@glowisle.me
+#+LANGUAGE: zh-CN
+#+OPTIONS: num:nil
+#+HTML_HEAD: <style>
+#+HTML_HEAD: body {
+#+HTML_HEAD:    background-color: black;
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: a {
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: </style>
+#+end_src
+
+只是信息配置和一些为了护眼的强制暗色模式。
+
+
+**** build()
+
+#+begin_src bash
+build() {
+    emacs --batch \
+        -l ~/.config/emacs/lisp/doom.el \
+        -l "${SCRIPTS_DIR}/publish.el" \
+        --eval "(org-publish-project \"niwa\" t)"
+}
+#+end_src
+
+通过 emacs 的 =--batch= 选项，将 emacs 作为 elisp 脚本解释器使用。
+
+*** publish.el
+
+#+begin_src elisp
+(setq org-publish-project-alist
+      '(("niwa-notes"
+         :base-directory "~/niwa/notes"
+         :base-extension "org"
+         :recursive t
+         :publishing-directory "~/niwa/public"
+         :publishing-function org-html-publish-to-html
+         :with-author nil
+         :with-creator nil
+         :section-numbers nil)
+
+         ("niwa"
+          :components ("niwa-notes"))))
+#+end_src
+
+配置发布信息，包括源文件、输出位置、递归等。
+
+*** 发布
+
+先构建静态文件
+
+#+begin_src
+$ bash ./script/niwa.sh build
+#+end_src
+
+然后推送到 git 仓库，Cloudflare Pages 会自动触发构建。
+
+
+** 一点题外话
+大概在去年，[[https://www.glowisle.me/][我的博客]]的副标题包含「数字花园」这四个字，我当时并不是特别清楚数字花园意味着什么（现在可能也是）。
+
+我从 2025 年 9 月 17 日开始用手机 Obsidian的[[https://github.com/ratiger/obsidian-banyan/tree/main][Banyan]]插件来写一些文章的草稿或思考过程，但写着写着就变成日记了，而且还是不太正能量的倒垃圾日记。它早期的状态很像数字花园，我也一直有做一个公开的数字花园的想法。
+
+在今年 1 月 27 日，[[https://www.eltr.ac/][eltrac]]发布了他的[[https://jar.geedea.pro/][新站]]，觉得这样的形式挺有趣的，而且在网站介绍的第一行有这样一句话：
+
+#+begin_quote
+This is a [[https://motherfuckingwebsite.com/][mother-fucking website]].
+#+end_quote
+
+我点进了那个链接，仔细看了一下，非常认同他的观点：
+
+- 轻量、快速
+- 可用可读可访问
+- 内容优先，而不是装饰有限
+
+于是就按照那个方向，开始着手做一个数字花园。
+
+我用起来比较方便的工具，不是 Obsidian 和 Notion，而是 Emacs，所以我就想到了用 org-mode 来做这件事。
+
+这套流程虽然不是最优解，但也许是最适合我的。
