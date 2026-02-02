@@ -3,7 +3,7 @@
 #+LANGUAGE: zh-CN
 
 ** niwa 是什么
-niwa（庭 / にわ）是我的 *极简数字花园实现方式* 。 _[[https://www.glowisle.me/][映屿]]的一部分_ 。
+niwa（庭 / にわ）是我的 *极简数字花园实现方式* 。[[https://www.glowisle.me/][映屿]]的一部分
 
 它不是博客框架，也不是 CMS，而是一套基于（doom) Emacs 的朴素的约定：
 
