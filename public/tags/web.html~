@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
 <head>
-<!-- 2026-02-06 五 16:46 -->
+<!-- 2026-02-06 五 16:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verdant的杂物间</title>
+<title>#web</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -204,47 +204,10 @@ color: white;
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Verdant的杂物间</h1>
-<div id="table-of-contents" role="doc-toc">
-<h2>&#30446;&#24405;</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgfb9cabc">最近更新</a></li>
-<li><a href="#orgf64e402">小径</a></li>
-</ul>
-</div>
-</div>
-<hr />
-
-<p>
-This is a <a href="https://motherfuckingwebsite.com/">motherfucking-website</a>.
-</p>
-
-<p>
-这里是 Verdant 的杂物间，<a href="https://www.glowisle.me/">映屿</a>的一部分，也是「<a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a>」的实验田。内容的风格上更像数字花园。会发布一些半成品文章、某些问题的解决方案或笔记。如果你对这个站点使用了什么技术感兴趣，可以阅读<a href="./how-do-i-build-this-site.html">《我是如何构建这个站点的》</a>。
-</p>
-
-<div id="outline-container-orgfb9cabc" class="outline-2">
-<h2 id="orgfb9cabc">最近更新</h2>
-<div class="outline-text-2" id="text-orgfb9cabc">
+<h1 class="title">#web</h1>
 <ul class="org-ul">
-<li><a href="./generate-tag-pages.html">生成标签页面</a></li>
-<li><a href="./how-do-i-build-this-site.html">我是如何构建这个站点的</a></li>
-<li><a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
+<li><a href="../radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
 </ul>
-</div>
-</div>
-
-<div id="outline-container-orgf64e402" class="outline-2">
-<h2 id="orgf64e402">小径</h2>
-<div class="outline-text-2" id="text-orgf64e402">
-<ul class="org-ul">
-<li><a href="./tags/web.html">网页</a></li>
-<li><a href="./tags/technology.html">技术</a></li>
-<li><a href="./tags/emacs.html">Emacs</a></li>
-</ul>
-</div>
-</div>
 </div>
 </body>
 </html>

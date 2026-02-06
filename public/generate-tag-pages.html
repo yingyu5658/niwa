@@ -6,7 +6,7 @@
 <!-- 2026-02-06 五 16:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verdant的杂物间</title>
+<title>生成标签页面</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -204,47 +204,54 @@ color: white;
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Verdant的杂物间</h1>
-<div id="table-of-contents" role="doc-toc">
-<h2>&#30446;&#24405;</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orgfb9cabc">最近更新</a></li>
-<li><a href="#orgf64e402">小径</a></li>
-</ul>
-</div>
-</div>
-<hr />
-
+<h1 class="title">生成标签页面</h1>
 <p>
-This is a <a href="https://motherfuckingwebsite.com/">motherfucking-website</a>.
+为niwa生成一个标签页面。
 </p>
 
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">niwa/generate-tag-pages</span> ()
+  <span style="font-style: italic;">"Generate tag pages under notes/tags/ from #+filetags."</span>
+  (<span style="font-weight: bold;">interactive</span>)
+  (<span style="font-weight: bold;">let*</span> ((root (expand-file-name <span style="font-style: italic;">"~/niwa"</span>))
+         (notes-dir (expand-file-name <span style="font-style: italic;">"notes"</span> root))
+         (tags-dir  (expand-file-name <span style="font-style: italic;">"notes/tags"</span> root))
+         (table (make-hash-table <span style="font-weight: bold;">:test</span> 'equal)))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#25910;&#38598; tags
+</span>    (<span style="font-weight: bold;">dolist</span> (file (directory-files notes-dir t <span style="font-style: italic;">"\\.org$"</span>))
+      (<span style="font-weight: bold;">unless</span> (string-match-p <span style="font-style: italic;">"/index\\.org$"</span> file)
+        (<span style="font-weight: bold;">with-temp-buffer</span>
+          (insert-file-contents file)
+          (<span style="font-weight: bold;">when</span> (re-search-forward <span style="font-style: italic;">"^#\\+filetags:[ \t]*</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">.*</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">$"</span> nil t)
+            (<span style="font-weight: bold;">dolist</span> (tag (split-string (match-string 1) <span style="font-style: italic;">":"</span> t))
+              (<span style="font-weight: bold;">push</span> file (gethash tag table)))))))
+    <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">&#20889;&#20837; tags/*.org
+</span>    (make-directory tags-dir t)
+    (maphash
+     (<span style="font-weight: bold;">lambda</span> (tag files)
+       (<span style="font-weight: bold;">with-temp-file</span> (expand-file-name (concat tag <span style="font-style: italic;">".org"</span>) tags-dir)
+         (insert <span style="font-style: italic;">"#+title: #"</span> tag <span style="font-style: italic;">"\n"</span>)
+         (insert <span style="font-style: italic;">"#+SETUPFILE: ../../template/setup/minimal.setup\n\n"</span>)
+         (<span style="font-weight: bold;">dolist</span> (f (delete-dups files))
+           (insert
+            (format <span style="font-style: italic;">"- [[file:../%s][%s]]\n"</span>
+                    (file-name-nondirectory f)
+                    (<span style="font-weight: bold;">with-temp-buffer</span>
+                      (insert-file-contents f)
+                      (<span style="font-weight: bold;">if</span> (re-search-forward <span style="font-style: italic;">"^#\\+title:[ \t]*</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">(</span><span style="font-style: italic;">.*</span><span style="font-weight: bold; font-style: italic;">\\</span><span style="font-weight: bold; font-style: italic;">)</span><span style="font-style: italic;">$"</span> nil t)
+                          (match-string 1)
+                        (file-name-base f))))))))
+     table)))
+</pre>
+</div>
+
 <p>
-这里是 Verdant 的杂物间，<a href="https://www.glowisle.me/">映屿</a>的一部分，也是「<a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a>」的实验田。内容的风格上更像数字花园。会发布一些半成品文章、某些问题的解决方案或笔记。如果你对这个站点使用了什么技术感兴趣，可以阅读<a href="./how-do-i-build-this-site.html">《我是如何构建这个站点的》</a>。
+Tags: 
 </p>
-
-<div id="outline-container-orgfb9cabc" class="outline-2">
-<h2 id="orgfb9cabc">最近更新</h2>
-<div class="outline-text-2" id="text-orgfb9cabc">
 <ul class="org-ul">
-<li><a href="./generate-tag-pages.html">生成标签页面</a></li>
-<li><a href="./how-do-i-build-this-site.html">我是如何构建这个站点的</a></li>
-<li><a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
+<li><a href="file:///tags/emacs">Emacs</a></li>
+<li><a href="file:///tags/technology">Technology</a></li>
 </ul>
-</div>
-</div>
-
-<div id="outline-container-orgf64e402" class="outline-2">
-<h2 id="orgf64e402">小径</h2>
-<div class="outline-text-2" id="text-orgf64e402">
-<ul class="org-ul">
-<li><a href="./tags/web.html">网页</a></li>
-<li><a href="./tags/technology.html">技术</a></li>
-<li><a href="./tags/emacs.html">Emacs</a></li>
-</ul>
-</div>
-</div>
 </div>
 </body>
 </html>

@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
 <head>
-<!-- 2026-02-06 五 16:46 -->
+<!-- 2026-02-06 五 16:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verdant的杂物间</title>
+<title>激进极简主义网页设计</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -204,44 +204,82 @@ color: white;
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Verdant的杂物间</h1>
+<h1 class="title">激进极简主义网页设计</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>&#30446;&#24405;</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfb9cabc">最近更新</a></li>
-<li><a href="#orgf64e402">小径</a></li>
+<li><a href="#orgc956e61">极简主义</a></li>
+<li><a href="#orga2e6009">激进极简主义网页设计</a>
+<ul>
+<li><a href="#org5a029a4">纯静态</a></li>
+<li><a href="#orga749189">仅必要的 CSS 且无 JS</a></li>
+<li><a href="#orgd99b68f">以文字为中心</a></li>
+<li><a href="#org23c4128">其他</a></li>
 </ul>
-</div>
-</div>
-<hr />
-
-<p>
-This is a <a href="https://motherfuckingwebsite.com/">motherfucking-website</a>.
-</p>
-
-<p>
-这里是 Verdant 的杂物间，<a href="https://www.glowisle.me/">映屿</a>的一部分，也是「<a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a>」的实验田。内容的风格上更像数字花园。会发布一些半成品文章、某些问题的解决方案或笔记。如果你对这个站点使用了什么技术感兴趣，可以阅读<a href="./how-do-i-build-this-site.html">《我是如何构建这个站点的》</a>。
-</p>
-
-<div id="outline-container-orgfb9cabc" class="outline-2">
-<h2 id="orgfb9cabc">最近更新</h2>
-<div class="outline-text-2" id="text-orgfb9cabc">
-<ul class="org-ul">
-<li><a href="./generate-tag-pages.html">生成标签页面</a></li>
-<li><a href="./how-do-i-build-this-site.html">我是如何构建这个站点的</a></li>
-<li><a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
+</li>
+<li><a href="#org6db9a43">参考</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf64e402" class="outline-2">
-<h2 id="orgf64e402">小径</h2>
-<div class="outline-text-2" id="text-orgf64e402">
+<div id="outline-container-orgc956e61" class="outline-2">
+<h2 id="orgc956e61">极简主义</h2>
+<div class="outline-text-2" id="text-orgc956e61">
+<p>
+极简主义（英语：Minimalism），是第二次世界大战之后的 1960 年代所兴起的一个艺术派系，又可称为“Minimal Art”，作为对抽象表现主义的反动而走向极致，以最原初的物自身或形式展示于观者面前为表现方式，意图消弥作者借着作品对观者意识的压迫性，极少化作品作为文本或符号形式出现时的暴力感，开放作品自身在艺术概念上的意像空间，让观者自主参与对作品的建构，最终成为作品在不特定限制下的作者。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga2e6009" class="outline-2">
+<h2 id="orga2e6009">激进极简主义网页设计</h2>
+<div class="outline-text-2" id="text-orga2e6009">
+</div>
+<div id="outline-container-org5a029a4" class="outline-3">
+<h3 id="org5a029a4">纯静态</h3>
+<div class="outline-text-3" id="text-org5a029a4">
+<p>
+作为由个人撰写的博客、资料、笔记展示页面，不需要任何后端代码，以内容为核心，保持简单、轻量、可维护。读者不需要在这个页面上有任何互动，唯一需要的就是用眼睛阅读文字。
+</p>
+</div>
+</div>
+<div id="outline-container-orga749189" class="outline-3">
+<h3 id="orga749189">仅必要的 CSS 且无 JS</h3>
+<div class="outline-text-3" id="text-orga749189">
+<p>
+由于读者只需要做一件事：阅读，所以这个页面不需要任何花里胡哨的装饰，包括但不限于：鼠标指针、艺术字体、背景图片。也不需要任何表单交互、以及弹窗广告、悬浮广告，并且引入 Javascript 代码会带来网页的性能问题，哪怕加载慢了 0.01ms。
+</p>
+</div>
+</div>
+<div id="outline-container-orgd99b68f" class="outline-3">
+<h3 id="orgd99b68f">以文字为中心</h3>
+<div class="outline-text-3" id="text-orgd99b68f">
+<p>
+言简意赅地阐述观点，尽可能减少图片出现的比重，对服务器带宽和读者的流量都友好。
+</p>
+</div>
+</div>
+<div id="outline-container-org23c4128" class="outline-3">
+<h3 id="org23c4128">其他</h3>
+<div class="outline-text-3" id="text-org23c4128">
+<p>
+我见过不少「功能丰富」的博客站点，比如 Live2D 看板娘、音乐播放器、天气时间显示、读完一篇文章还没加载出来的开屏图……我认为这和信息的传播 <b>完全没有任何关系</b> 。当然，适当的装饰是锦上添花，但 <b>别太过了</b> 。
+</p>
+
+<p>
+这个网站就是把简单做到极致的尝试，也许在不少人眼中看来这是「简陋」「低技术力」的表现，但要先弄清楚一个站点是在为什么而服务。这种设计选择牺牲了互动性、表现力与所谓的现代感，但我认为这是值得的。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6db9a43" class="outline-2">
+<h2 id="org6db9a43">参考</h2>
+<div class="outline-text-2" id="text-org6db9a43">
 <ul class="org-ul">
-<li><a href="./tags/web.html">网页</a></li>
-<li><a href="./tags/technology.html">技术</a></li>
-<li><a href="./tags/emacs.html">Emacs</a></li>
+<li><a href="https://zh.wikipedia.org/zh-cn/%E6%A5%B5%E7%B0%A1%E4%B8%BB%E7%BE%A9">极简主义 - 维基百科</a></li>
+<li><a href="https://motherfuckingwebsite.com/">motherfuck website</a></li>
 </ul>
 </div>
 </div>

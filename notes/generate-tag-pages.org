@@ -1,0 +1,45 @@
+#+title: 生成标签页面
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+filetags: :emacs:technology:
+#+EXPORT_FILE_NAME: /home/yingyu5658/niwa/public/generate-tag-pages.html
+
+为niwa生成一个标签页面。
+
+#+BEGIN_SRC elisp
+(defun niwa/generate-tag-pages ()
+  "Generate tag pages under notes/tags/ from #+filetags."
+  (interactive)
+  (let* ((root (expand-file-name "~/niwa"))
+         (notes-dir (expand-file-name "notes" root))
+         (tags-dir  (expand-file-name "notes/tags" root))
+         (table (make-hash-table :test 'equal)))
+    ;; 收集 tags
+    (dolist (file (directory-files notes-dir t "\\.org$"))
+      (unless (string-match-p "/index\\.org$" file)
+        (with-temp-buffer
+          (insert-file-contents file)
+          (when (re-search-forward "^#\\+filetags:[ \t]*\\(.*\\)$" nil t)
+            (dolist (tag (split-string (match-string 1) ":" t))
+              (push file (gethash tag table)))))))
+    ;; 写入 tags/*.org
+    (make-directory tags-dir t)
+    (maphash
+     (lambda (tag files)
+       (with-temp-file (expand-file-name (concat tag ".org") tags-dir)
+         (insert "#+title: #" tag "\n")
+         (insert "#+SETUPFILE: ../../template/setup/minimal.setup\n\n")
+         (dolist (f (delete-dups files))
+           (insert
+            (format "- [[file:../%s][%s]]\n"
+                    (file-name-nondirectory f)
+                    (with-temp-buffer
+                      (insert-file-contents f)
+                      (if (re-search-forward "^#\\+title:[ \t]*\\(.*\\)$" nil t)
+                          (match-string 1)
+                        (file-name-base f))))))))
+     table)))
+#+END_SRC
+
+Tags: 
+- [[/tags/emacs][Emacs]]
+- [[/tags/technology][Technology]]

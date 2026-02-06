@@ -1,0 +1,7 @@
+#+title: Title
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+EXPORT_FILE_NAME: /home/yingyu5658/niwa/public/test.html
+
+
+
+** Content

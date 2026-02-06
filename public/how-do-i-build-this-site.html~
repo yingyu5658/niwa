@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" xml:lang="zh-CN">
 <head>
-<!-- 2026-02-06 五 16:46 -->
+<!-- 2026-02-06 五 16:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Verdant的杂物间</title>
+<title>我是如何构建这个站点的</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -204,45 +204,226 @@ color: white;
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Verdant的杂物间</h1>
+<h1 class="title">我是如何构建这个站点的</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>&#30446;&#24405;</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfb9cabc">最近更新</a></li>
-<li><a href="#orgf64e402">小径</a></li>
+<li><a href="#orgccef6e1">这个网站是怎么做的？</a>
+<ul>
+<li><a href="#orgdfeff17">niwa.sh</a>
+<ul>
+<li><a href="#org1cebfa5"><code>new_note()</code></a></li>
+<li><a href="#org88f87df">build()</a></li>
+</ul>
+</li>
+<li><a href="#org81cae63">publish.el</a></li>
+<li><a href="#orgcbc9f57">发布</a></li>
+</ul>
+</li>
+<li><a href="#orgff442cd">一点题外话</a></li>
 </ul>
 </div>
 </div>
+<p>
+在<a href="https://github.com/yingyu5658/niwa">Github</a>上查看这个项目→
+</p>
+
 <hr />
 
+<div id="outline-container-orgccef6e1" class="outline-2">
+<h2 id="orgccef6e1">这个网站是怎么做的？</h2>
+<div class="outline-text-2" id="text-orgccef6e1">
 <p>
-This is a <a href="https://motherfuckingwebsite.com/">motherfucking-website</a>.
+仅用 Emacs 两个脚本文件：
+</p>
+
+<pre class="example">
+$ tree scripts
+scripts
+├── niwa.sh
+└── publish.el
+</pre>
+
+<ul class="org-ul">
+<li><code>niwa.sh</code>: 主程序，处理命令。目前只有 new 用于新建笔记，build 用于构建。</li>
+<li><code>publish.el</code>: 一个 Elisp 脚本，做一些配置，批量导出 org 为 html。</li>
+</ul>
+</div>
+
+<div id="outline-container-orgdfeff17" class="outline-3">
+<h3 id="orgdfeff17">niwa.sh</h3>
+<div class="outline-text-3" id="text-orgdfeff17">
+</div>
+<div id="outline-container-org1cebfa5" class="outline-4">
+<h4 id="org1cebfa5"><code>new_note()</code></h4>
+<div class="outline-text-4" id="text-org1cebfa5">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">new_note</span>() {
+    <span style="font-weight: bold; font-style: italic;">file_name</span>=$<span style="font-weight: bold; font-style: italic;">1</span>
+    cp $<span style="font-weight: bold; font-style: italic;">TEMPLATE_FILE</span> <span style="font-style: italic;">"$NOTES_DIR/${file_name}.org"</span> &amp;&amp; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"&#21019;&#24314;&#31508;&#35760;&#25104;&#21151;&#65306;$NOTES_DIR/${file_name}.org"</span>
+    <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"#+EXPORT_FILE_NAME: $PUBLIC_DIR/${file_name}.html"</span> &gt;&gt; <span style="font-style: italic;">"$NOTES_DIR/${file_name}.org"</span>
+}
+</pre>
+</div>
+
+<p>
+原理非常简单，复制模板 org 文件到命令行参数给定的文件名。并且将一个导出配置重定向到这个文件，用于导出单页 html。
 </p>
 
 <p>
-这里是 Verdant 的杂物间，<a href="https://www.glowisle.me/">映屿</a>的一部分，也是「<a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a>」的实验田。内容的风格上更像数字花园。会发布一些半成品文章、某些问题的解决方案或笔记。如果你对这个站点使用了什么技术感兴趣，可以阅读<a href="./how-do-i-build-this-site.html">《我是如何构建这个站点的》</a>。
+在 <code>template.org</code> 中只有两行文本：
 </p>
 
-<div id="outline-container-orgfb9cabc" class="outline-2">
-<h2 id="orgfb9cabc">最近更新</h2>
-<div class="outline-text-2" id="text-orgfb9cabc">
-<ul class="org-ul">
-<li><a href="./generate-tag-pages.html">生成标签页面</a></li>
-<li><a href="./how-do-i-build-this-site.html">我是如何构建这个站点的</a></li>
-<li><a href="./radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
-</ul>
+<div class="org-src-container">
+<pre class="src src-org">#+title:<span style="font-weight: bold;">
+</span><span style="font-weight: bold; font-style: italic;">#+SETUPFILE: ~/niwa/template/setup/minimal.setup</span>
+</pre>
+</div>
+
+<p>
+第一行标题，第二行引入 setup：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-setup">#+AUTHOR: Verdant
+#+EMAIL: i@glowisle.me
+#+LANGUAGE: zh-CN
+#+OPTIONS: num:nil
+#+HTML_HEAD: &lt;style&gt;
+#+HTML_HEAD: body {
+#+HTML_HEAD:    background-color: black;
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: a {
+#+HTML_HEAD:    color: white;
+#+HTML_HEAD: }
+#+HTML_HEAD: &lt;/style&gt;
+</pre>
+</div>
+
+<p>
+只是信息配置和一些为了护眼的强制暗色模式。
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgf64e402" class="outline-2">
-<h2 id="orgf64e402">小径</h2>
-<div class="outline-text-2" id="text-orgf64e402">
+
+<div id="outline-container-org88f87df" class="outline-4">
+<h4 id="org88f87df">build()</h4>
+<div class="outline-text-4" id="text-org88f87df">
+<div class="org-src-container">
+<pre class="src src-bash"><span style="font-weight: bold;">build</span>() {
+    emacs --batch <span style="font-style: italic;">\</span>
+        -l ~/.config/emacs/lisp/doom.el <span style="font-style: italic;">\</span>
+        -l <span style="font-style: italic;">"${SCRIPTS_DIR}/publish.el"</span> <span style="font-style: italic;">\</span>
+        --eval <span style="font-style: italic;">"(org-publish-project \"niwa\" t)"</span>
+}
+</pre>
+</div>
+
+<p>
+通过 emacs 的 <code>--batch</code> 选项，将 emacs 作为 elisp 脚本解释器使用。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org81cae63" class="outline-3">
+<h3 id="org81cae63">publish.el</h3>
+<div class="outline-text-3" id="text-org81cae63">
+<div class="org-src-container">
+<pre class="src src-elisp">(<span style="font-weight: bold;">setq</span> org-publish-project-alist
+      '((<span style="font-style: italic;">"niwa-notes"</span>
+         <span style="font-weight: bold;">:base-directory</span> <span style="font-style: italic;">"~/niwa/notes"</span>
+         <span style="font-weight: bold;">:base-extension</span> <span style="font-style: italic;">"org"</span>
+         <span style="font-weight: bold;">:recursive</span> t
+         <span style="font-weight: bold;">:publishing-directory</span> <span style="font-style: italic;">"~/niwa/public"</span>
+         <span style="font-weight: bold;">:publishing-function</span> org-html-publish-to-html
+         <span style="font-weight: bold;">:with-author</span> nil
+         <span style="font-weight: bold;">:with-creator</span> nil
+         <span style="font-weight: bold;">:section-numbers</span> nil)
+
+         (<span style="font-style: italic;">"niwa"</span>
+          <span style="font-weight: bold;">:components</span> (<span style="font-style: italic;">"niwa-notes"</span>))))
+</pre>
+</div>
+
+<p>
+配置发布信息，包括源文件、输出位置、递归等。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcbc9f57" class="outline-3">
+<h3 id="orgcbc9f57">发布</h3>
+<div class="outline-text-3" id="text-orgcbc9f57">
+<p>
+先构建静态文件
+</p>
+
+<pre class="example">
+$ bash ./script/niwa.sh build
+</pre>
+
+<p>
+然后推送到 git 仓库，Cloudflare Pages 会自动触发构建。
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgff442cd" class="outline-2">
+<h2 id="orgff442cd">一点题外话</h2>
+<div class="outline-text-2" id="text-orgff442cd">
+<p>
+大概在去年，<a href="https://www.glowisle.me/">我的博客</a>的副标题包含「数字花园」这四个字，我当时并不是特别清楚数字花园意味着什么（现在可能也是）。
+</p>
+
+<p>
+我从 2025 年 9 月 17 日开始用手机 Obsidian的<a href="https://github.com/ratiger/obsidian-banyan/tree/main">Banyan</a>插件来写一些文章的草稿或思考过程，但写着写着就变成日记了，而且还是不太正能量的倒垃圾日记。它早期的状态很像数字花园，我也一直有做一个公开的数字花园的想法。
+</p>
+
+<p>
+在今年 1 月 27 日，<a href="https://www.eltr.ac/">eltrac</a>发布了他的<a href="https://jar.geedea.pro/">新站</a>，觉得这样的形式挺有趣的，而且在网站介绍的第一行有这样一句话：
+</p>
+
+<blockquote>
+<p>
+This is a <a href="https://motherfuckingwebsite.com/">mother-fucking website</a>.
+</p>
+</blockquote>
+
+<p>
+我点进了那个链接，仔细看了一下，非常认同他的观点，网页应该应该：
+</p>
+
 <ul class="org-ul">
-<li><a href="./tags/web.html">网页</a></li>
-<li><a href="./tags/technology.html">技术</a></li>
-<li><a href="./tags/emacs.html">Emacs</a></li>
+<li>轻量、快速</li>
+<li>可用、可读、可访问</li>
+<li>内容优先，而不是装饰优先</li>
 </ul>
+
+<p>
+于是就按照那个方向，开始着手做一个数字花园。
+</p>
+
+<p>
+我用起来比较方便的工具，不是 Obsidian 和 Notion，而是 Emacs，所以我就想到了用 org-mode 来做这件事。
+</p>
+
+<p>
+这套流程虽然不是最优解，但也许是最适合我的。
+</p>
+
+<p>
+嗯？你问我为什么不全在 Emacs 里做？因为我讨厌写 Elisp！！！
+</p>
+
+<p>
+这门语言一点也不优雅，写多了之后，连语法怪异不堪的 shell 脚本都觉得无比香甜了……
+</p>
 </div>
 </div>
 </div>
