@@ -2,3 +2,4 @@
 #+SETUPFILE: ../../template/setup/minimal.setup
 
 - [[file:../how-do-i-build-this-site.org][我是如何构建这个站点的]]
+- [[../generate-tag-pages.org][生成标签页面]]

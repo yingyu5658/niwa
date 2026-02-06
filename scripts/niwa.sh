@@ -19,8 +19,13 @@ new_note() {
 
 build() {
     emacs --batch \
-        -l ~/.config/emacs/lisp/doom.el \
+        --no-init-file \
+        --no-site-file \
         -l "${SCRIPTS_DIR}/publish.el" \
+        --eval "(setq package-archives '((\"gnu\" . \"https://elpa.gnu.org/packages/\") (\"melpa\" . \"https://melpa.org/packages/\")))" \
+        --eval "(package-initialize)" \
+        --eval "(unless (package-installed-p 'org) (package-refresh-contents) (package-install 'org))" \
+        --eval "(unless (package-installed-p 'htmlize) (package-refresh-contents) (package-install 'htmlize))" \
         --eval "(org-publish-project \"niwa\" t)"
 }
 
