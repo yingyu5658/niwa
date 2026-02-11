@@ -1,2 +1,3 @@
 #+title:
+#+filetags: ::
 #+SETUPFILE: ~/niwa/template/setup/minimal.setup

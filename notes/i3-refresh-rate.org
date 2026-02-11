@@ -1,0 +1,17 @@
+#+title: i3刷新率问题
+#+filetags: :technology:
+#+SETUPFILE: ~/niwa/template/setup/minimal.setup
+#+EXPORT_FILE_NAME: /home/yingyu5658/niwa/public/i3-refresh-rate.html
+
+查看当前显示器名称
+
+#+BEGIN_SRC
+xrandr
+#+END_SRC
+
+输出可能包含类似 =HDMI-0= 或 =DP-0=
+
+#+BEGIN_SRC
+xrandr --output DP-0 --mode 2560x1080 --rate 200
+glxgears -info  # 查看帧数
+#+END_SRC

@@ -6,7 +6,7 @@
 <!-- 2026-02-11 三 12:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>#philosophy</title>
+<title>i3刷新率问题</title>
 <meta name="generator" content="Org Mode" />
 <style>
   #content { max-width: 60em; margin: auto; }
@@ -204,10 +204,23 @@ color: white;
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">#philosophy</h1>
-<ul class="org-ul">
-<li><a href="../radical-minimalist-web-design.html">激进极简主义网页设计</a></li>
-</ul>
+<h1 class="title">i3刷新率问题</h1>
+<p>
+查看当前显示器名称
+</p>
+
+<pre class="example">
+xrandr
+</pre>
+
+<p>
+输出可能包含类似 <code>HDMI-0</code> 或 <code>DP-0</code>
+</p>
+
+<pre class="example">
+xrandr --output DP-0 --mode 2560x1080 --rate 200
+glxgears -info  # 查看帧数
+</pre>
 </div>
 </body>
 </html>
